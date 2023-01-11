@@ -10,7 +10,7 @@
 import Adapters from '../adapters/index.js'
 
 // Load the JSON RPC Controller.
-import JSONRPC from './json-rpc/index.js'
+// import JSONRPC from './json-rpc/index.js'
 
 // Load the Clean Architecture Use Case libraries.
 import UseCases from '../use-cases/index.js'
@@ -61,15 +61,15 @@ class Controllers {
 
   // Add the JSON RPC router to the ipfs-coord adapter.
   attachRPCControllers () {
-    const jsonRpcController = new JSONRPC({
-      adapters: this.adapters,
-      useCases: this.useCases
-    })
+    // const jsonRpcController = new JSONRPC({
+    //   adapters: this.adapters,
+    //   useCases: this.useCases
+    // })
 
     // Attach the input of the JSON RPC router to the output of ipfs-coord.
-    this.adapters.ipfs.ipfsCoordAdapter.attachRPCRouter(
-      jsonRpcController.router
-    )
+    // this.adapters.ipfs.ipfsCoordAdapter.attachRPCRouter(
+    //   jsonRpcController.router
+    // )
   }
 }
 

@@ -4,7 +4,9 @@
   https://troutsblog.com/blog/clean-architecture
 */
 
+// Local libraries
 import UserUseCases from './user.js'
+import StoreUseCases from './stores.js'
 
 class UseCases {
   constructor (localConfig = {}) {
@@ -17,6 +19,7 @@ class UseCases {
 
     // console.log('use-cases/index.js localConfig: ', localConfig)
     this.user = new UserUseCases(localConfig)
+    this.store = new StoreUseCases(localConfig)
   }
 
   // Run any startup Use Cases at the start of the app.
