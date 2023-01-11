@@ -33,7 +33,7 @@ class StoreEntity {
       throw new Error('psf-slp-indexer must identify the token as a SSP token.')
     }
 
-    if(!Array.isArray(storeData.keywords)) {
+    if (!Array.isArray(storeData.keywords)) {
       throw new Error('JSON LD for store data must contain a keywords array')
     }
 

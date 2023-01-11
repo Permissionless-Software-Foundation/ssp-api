@@ -25,7 +25,7 @@ class StoreUseCase {
     // this.UserModel = this.adapters.localdb.Users
     this.storeEntity = new StoreEntity()
     this.StoreModel = this.adapters.localdb.Store
-    this.wallet = new SlpWallet(undefined, {interface: 'consumer-api'})
+    this.wallet = new SlpWallet(undefined, { interface: 'consumer-api' })
   }
 
   // Create a new store model and add it to the Mongo database.
@@ -43,7 +43,13 @@ class StoreUseCase {
       const tokenData = await this.wallet.getTokenData2(storeObj.tokenId)
       console.log(`tokenData: ${JSON.stringify(tokenData, null, 2)}`)
 
-      if(!tokenData.mutableData || !tokenData.mutableData.jsonLd || !tokenData.mutableData.jsonLd.storeData) {
+      // TODO: Create the database model immediately when the webhook is fired.
+      // Move the code for retrieving the mutable data into its own subfunction.
+      // That can be called by other function to update the models mutable data
+      // too. Also, this function (creating a new model on webhook) should not
+      // fail if the mutable data can not be retrieved.
+
+      if (!tokenData.mutableData || !tokenData.mutableData.jsonLd || !tokenData.mutableData.jsonLd.storeData) {
         throw new Error(`Could not retrieve mutable store data for token ${storeObj.tokenId}`)
       }
       storeObj.immutableData = tokenData.immutableData
@@ -59,7 +65,7 @@ class StoreUseCase {
 
       try {
         await storeModel.save()
-      } catch(err) {
+      } catch (err) {
         throw new Error('Token has already been recorded into database.')
       }
 
