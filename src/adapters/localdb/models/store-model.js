@@ -25,7 +25,10 @@ const Store = new mongoose.Schema({
   totalBurned: { type: String },
   totalMinted: { type: String },
   nfts: { type: Array },
-  isSsp: { type: Boolean }
+  isSsp: { type: Boolean },
+  immutableData: { type: Object },
+  mutableData: { type: Object },
+  storeData: { type: Object }
 })
 
 // export default mongoose.model('user', User)

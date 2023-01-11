@@ -8,7 +8,7 @@
 // process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
 // const contactLib = new ContactLib()
 
-let _this
+// let _this
 
 class WebhookController {
   constructor (localConfig = {}) {
@@ -53,7 +53,7 @@ class WebhookController {
         success
       }
     } catch (err) {
-      _this.handleError(ctx, err)
+      this.handleError(ctx, err)
     }
   }
 

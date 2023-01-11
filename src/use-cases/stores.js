@@ -3,9 +3,11 @@
   functions are called by the /user REST API endpoints.
 */
 
-// import UserEntity from '../entities/user.js'
-import StoreEntity from '../entities/store-entity.js'
+// Global npm libraries
+import SlpWallet from 'minimal-slp-wallet'
 
+// Local libraries
+import StoreEntity from '../entities/store-entity.js'
 import wlogger from '../adapters/wlogger.js'
 
 class StoreUseCase {
@@ -23,6 +25,7 @@ class StoreUseCase {
     // this.UserModel = this.adapters.localdb.Users
     this.storeEntity = new StoreEntity()
     this.StoreModel = this.adapters.localdb.Store
+    this.wallet = new SlpWallet(undefined, {interface: 'consumer-api'})
   }
 
   // Create a new store model and add it to the Mongo database.
@@ -32,6 +35,21 @@ class StoreUseCase {
     try {
       console.log('storeObj: ', storeObj)
 
+      // Note: There may be a race condition. I might need to add an artificial
+      // delay so that the SLP indexer this app talks to does not race ahead
+      // of the Cash Stack server used to retrieve token data.
+
+      // Get the mutable data for the token.
+      const tokenData = await this.wallet.getTokenData2(storeObj.tokenId)
+      console.log(`tokenData: ${JSON.stringify(tokenData, null, 2)}`)
+
+      if(!tokenData.mutableData || !tokenData.mutableData.jsonLd || !tokenData.mutableData.jsonLd.storeData) {
+        throw new Error(`Could not retrieve mutable store data for token ${storeObj.tokenId}`)
+      }
+      storeObj.immutableData = tokenData.immutableData
+      storeObj.mutableData = tokenData.mutableData
+      storeObj.storeData = tokenData.mutableData.jsonLd.storeData
+
       // Input Validation
       const store = this.storeEntity.validate(storeObj)
       console.log('store entity: ', store)
@@ -39,32 +57,16 @@ class StoreUseCase {
       const storeModel = new this.StoreModel(storeObj)
       console.log('store model: ', storeModel)
 
-      // const userEntity = this.UserEntity.validate(userObj)
-      // const user = new this.UserModel(userEntity)
-      //
-      // // Enforce default value of 'user'
-      // user.type = 'user'
-      // // console.log('user: ', user)
-      //
-      // // Save the new user model to the database.
-      // await user.save()
-      //
-      // // Generate a JWT token for the user.
-      // const token = user.generateToken()
-      //
-      // // Convert the database model to a JSON object.
-      // const userData = user.toJSON()
-      // // console.log('userData: ', userData)
-      //
-      // // Delete the password property.
-      // delete userData.password
-      //
-      // return { userData, token }
+      try {
+        await storeModel.save()
+      } catch(err) {
+        throw new Error('Token has already been recorded into database.')
+      }
 
-      return true
+      return storeModel.toJSON()
     } catch (err) {
       // console.log('createUser() error: ', err)
-      wlogger.error('Error in lib/users.js/createUser()')
+      wlogger.error('Error in use-cases/stores.js/createStore(): ', err)
       throw err
     }
   }
