@@ -31,12 +31,25 @@ class UserUseCaseMock {
   }
 }
 
+class Store {
+  async createStore() {
+    return true
+  }
+
+  async updateMutableData() {
+    return true
+  }
+}
+
+
 class UseCasesMock {
   constuctor(localConfig = {}) {
     // this.user = new UserUseCaseMock(localConfig)
   }
 
   user = new UserUseCaseMock()
+
+  store = new Store()
 }
 
 export default UseCasesMock;

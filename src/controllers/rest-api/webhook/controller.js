@@ -1,14 +1,8 @@
 /*
-  Controller for the /contact REST API endpoints.
+  Controller for the /webhook REST API endpoints.
 */
 
 /* eslint-disable no-useless-escape */
-// import ContactLib from '../../../adapters/contact.js'
-
-// process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
-// const contactLib = new ContactLib()
-
-// let _this
 
 class WebhookController {
   constructor (localConfig = {}) {
