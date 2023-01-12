@@ -57,6 +57,30 @@ class WebhookController {
     }
   }
 
+  /**
+   * @api {post} /webhook/claim New SSP Claim
+   * @apiName NewClaim
+   * @apiGroup Webhook
+   *
+   * @apiExample Example usage:
+   * curl -H "Content-Type: application/json" -X POST -d '{ "ticker": "SSP-287262", "documentHash": "30cedeefa81ad5ee077641607ac1416415759e6d6cfb2de6bd78d491d8dcd3c5" }' localhost:5020/webhook/claim
+   *
+   */
+  async claim (ctx) {
+    try {
+      const data = ctx.request.body
+      console.log('webook/claim data: ', data)
+
+      const claim = true
+
+      ctx.body = {
+        claim
+      }
+    } catch (err) {
+      this.handleError(ctx, err)
+    }
+  }
+
   // DRY error handler
   handleError (ctx, err) {
     // If an HTTP status is specified by the buisiness logic, use that.

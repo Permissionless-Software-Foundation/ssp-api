@@ -46,6 +46,7 @@ class WebhookRouter {
 
     // Define the routes and attach the controller.
     this.router.post('/token', this.webhookRESTController.token)
+    this.router.post('/claim', this.webhookRESTController.claim)
 
     // Attach the Controller routes to the Koa app.
     app.use(this.router.routes())

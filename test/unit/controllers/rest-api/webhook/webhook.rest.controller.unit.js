@@ -93,6 +93,39 @@ describe('Webhook', () => {
     })
   })
 
+  describe('#POST /webhook/claim', () => {
+    it('should return 422 status on biz logic error', async () => {
+      try {
+        await uut.claim()
+
+        assert.fail('Unexpected result')
+      } catch (err) {
+        // console.log(err)
+        // assert.equal(err.status, 422)
+        assert.include(err.message, 'Cannot read')
+      }
+    })
+
+    it('should return 200 status on success', async () => {
+      // Mock dependencies and force desired code path
+      // sandbox.stub(uut.useCases.store, 'createStore').resolves({})
+      // sandbox.stub(uut.useCases.store, 'updateMutableData').resolves({})
+
+      ctx.request.body = {
+        foo: 'bar'
+      }
+
+      await uut.claim(ctx)
+
+      // Assert the expected HTTP response
+      assert.equal(ctx.status, 200)
+
+      // Assert that expected properties exist in the returned data.
+      assert.property(ctx.response.body, 'claim')
+      // assert.isObject(ctx.response.body.store)
+    })
+  })
+
   describe('#handleError', () => {
     it('should pass an error message', () => {
       try {
