@@ -26,16 +26,12 @@ class StoreEntity {
     }
 
     if (type !== 129) {
-      throw new Error('Store token must by a Group token (type 129)')
+      throw new Error('Store token must be a Group token (type 129)')
     }
 
     if (!isSsp) {
       throw new Error('psf-slp-indexer must identify the token as a SSP token.')
     }
-
-    // if (!Array.isArray(storeData.keywords)) {
-    //   throw new Error('JSON LD for store data must contain a keywords array')
-    // }
 
     return inObj
   }

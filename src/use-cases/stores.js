@@ -33,35 +33,13 @@ class StoreUseCase {
   // an instance of psf-slp-indexer running the ssp branch.
   async createStore (storeObj) {
     try {
-      console.log('storeObj: ', storeObj)
-
-      // Note: There may be a race condition. I might need to add an artificial
-      // delay so that the SLP indexer this app talks to does not race ahead
-      // of the Cash Stack server used to retrieve token data.
-
-      // Get the mutable data for the token.
-      // const tokenData = await this.wallet.getTokenData2(storeObj.tokenId)
-      // console.log(`tokenData: ${JSON.stringify(tokenData, null, 2)}`)
-
-      // TODO: Create the database model immediately when the webhook is fired.
-      // Move the code for retrieving the mutable data into its own subfunction.
-      // That can be called by other function to update the models mutable data
-      // too. Also, this function (creating a new model on webhook) should not
-      // fail if the mutable data can not be retrieved.
-
-      // if (!tokenData.mutableData || !tokenData.mutableData.jsonLd || !tokenData.mutableData.jsonLd.storeData) {
-      //   throw new Error(`Could not retrieve mutable store data for token ${storeObj.tokenId}`)
-      // }
-      // storeObj.immutableData = tokenData.immutableData
-      // storeObj.mutableData = tokenData.mutableData
-      // storeObj.storeData = tokenData.mutableData.jsonLd.storeData
+      // console.log('storeObj: ', storeObj)
 
       // Input Validation
-      const store = this.storeEntity.validate(storeObj)
-      console.log('store entity: ', store)
+      this.storeEntity.validate(storeObj)
 
       const storeModel = new this.StoreModel(storeObj)
-      console.log('store model: ', storeModel)
+      // console.log('store model: ', storeModel)
 
       try {
         await storeModel.save()
@@ -91,9 +69,12 @@ class StoreUseCase {
       const tokenData = await this.wallet.getTokenData2(tokenId)
       console.log(`tokenData: ${JSON.stringify(tokenData, null, 2)}`)
 
+      // Abort if the mutable data could not be downloaded.
       if (!tokenData.mutableData || !tokenData.mutableData.jsonLd || !tokenData.mutableData.jsonLd.storeData) {
         throw new Error(`Could not retrieve mutable store data for token ${tokenId}`)
       }
+
+      // Update the token data.
       storeModel.immutableData = tokenData.immutableData
       storeModel.mutableData = tokenData.mutableData
       storeModel.storeData = tokenData.mutableData.jsonLd.storeData
@@ -102,7 +83,7 @@ class StoreUseCase {
 
       return storeModel.toJSON()
     } catch (err) {
-      // console.log('createUser() error: ', err)
+      // console.log('updateMutableData() error: ', err)
       wlogger.error('Error in use-cases/stores.js/updateMutableData(): ', err.message)
       throw err
     }
