@@ -40,8 +40,8 @@ class StoreUseCase {
       // of the Cash Stack server used to retrieve token data.
 
       // Get the mutable data for the token.
-      const tokenData = await this.wallet.getTokenData2(storeObj.tokenId)
-      console.log(`tokenData: ${JSON.stringify(tokenData, null, 2)}`)
+      // const tokenData = await this.wallet.getTokenData2(storeObj.tokenId)
+      // console.log(`tokenData: ${JSON.stringify(tokenData, null, 2)}`)
 
       // TODO: Create the database model immediately when the webhook is fired.
       // Move the code for retrieving the mutable data into its own subfunction.
@@ -49,12 +49,12 @@ class StoreUseCase {
       // too. Also, this function (creating a new model on webhook) should not
       // fail if the mutable data can not be retrieved.
 
-      if (!tokenData.mutableData || !tokenData.mutableData.jsonLd || !tokenData.mutableData.jsonLd.storeData) {
-        throw new Error(`Could not retrieve mutable store data for token ${storeObj.tokenId}`)
-      }
-      storeObj.immutableData = tokenData.immutableData
-      storeObj.mutableData = tokenData.mutableData
-      storeObj.storeData = tokenData.mutableData.jsonLd.storeData
+      // if (!tokenData.mutableData || !tokenData.mutableData.jsonLd || !tokenData.mutableData.jsonLd.storeData) {
+      //   throw new Error(`Could not retrieve mutable store data for token ${storeObj.tokenId}`)
+      // }
+      // storeObj.immutableData = tokenData.immutableData
+      // storeObj.mutableData = tokenData.mutableData
+      // storeObj.storeData = tokenData.mutableData.jsonLd.storeData
 
       // Input Validation
       const store = this.storeEntity.validate(storeObj)
@@ -72,7 +72,38 @@ class StoreUseCase {
       return storeModel.toJSON()
     } catch (err) {
       // console.log('createUser() error: ', err)
-      wlogger.error('Error in use-cases/stores.js/createStore(): ', err)
+      wlogger.error('Error in use-cases/stores.js/createStore(): ', err.message)
+      throw err
+    }
+  }
+
+  // Retrieve a database model for a store, based on its token ID. Then download
+  // the latest mutable data for the token and update the database model.
+  async updateMutableData (tokenId) {
+    try {
+      // Retrieve the model of the store from the Mongo database.
+      const storeModel = await this.StoreModel.findOne({ tokenId })
+      if (!storeModel) {
+        throw new Error(`updateMutableData(): Store not found with token ID ${tokenId}`)
+      }
+
+      // Get the mutable data for the token.
+      const tokenData = await this.wallet.getTokenData2(tokenId)
+      console.log(`tokenData: ${JSON.stringify(tokenData, null, 2)}`)
+
+      if (!tokenData.mutableData || !tokenData.mutableData.jsonLd || !tokenData.mutableData.jsonLd.storeData) {
+        throw new Error(`Could not retrieve mutable store data for token ${tokenId}`)
+      }
+      storeModel.immutableData = tokenData.immutableData
+      storeModel.mutableData = tokenData.mutableData
+      storeModel.storeData = tokenData.mutableData.jsonLd.storeData
+
+      await storeModel.save()
+
+      return storeModel.toJSON()
+    } catch (err) {
+      // console.log('createUser() error: ', err)
+      wlogger.error('Error in use-cases/stores.js/updateMutableData(): ', err.message)
       throw err
     }
   }

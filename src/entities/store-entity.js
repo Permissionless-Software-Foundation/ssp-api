@@ -8,7 +8,7 @@
 
 class StoreEntity {
   validate (inObj = {}) {
-    const { name, ticker, tokenId, documentHash, type, isSsp, storeData } = inObj
+    const { name, ticker, tokenId, documentHash, type, isSsp } = inObj
 
     // Input Validation
     if (!name || typeof name !== 'string') {
@@ -33,9 +33,9 @@ class StoreEntity {
       throw new Error('psf-slp-indexer must identify the token as a SSP token.')
     }
 
-    if (!Array.isArray(storeData.keywords)) {
-      throw new Error('JSON LD for store data must contain a keywords array')
-    }
+    // if (!Array.isArray(storeData.keywords)) {
+    //   throw new Error('JSON LD for store data must contain a keywords array')
+    // }
 
     return inObj
   }
