@@ -47,10 +47,16 @@ class WebhookController {
       // const emailObj = data.obj
       // await _this.contactLib.sendEmail(emailObj)
 
-      const success = await this.useCases.store.createStore(data)
+      let store = await this.useCases.store.createStore(data)
+
+      // Try to retrieve mutable data for the token, but don't let this prevent
+      // the flow if it fails.
+      try {
+        store = await this.useCases.store.updateMutableData(store.tokenId)
+      } catch (err) {}
 
       ctx.body = {
-        success
+        store
       }
     } catch (err) {
       this.handleError(ctx, err)

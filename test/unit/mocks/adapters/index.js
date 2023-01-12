@@ -63,6 +63,20 @@ const localdb = {
 
   validatePassword: () => {
     return true
+  },
+
+  Store: class Store {
+    static findById () {}
+    static find () {}
+    static findOne () {}
+
+    async save () {
+      return {}
+    }
+
+    toJSON () {
+      return {}
+    }
   }
 }
 
