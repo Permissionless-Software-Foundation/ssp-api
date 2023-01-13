@@ -41,6 +41,12 @@ class Store {
   }
 }
 
+class Claim {
+  async createClaim() {
+    return true
+  }
+}
+
 
 class UseCasesMock {
   constuctor(localConfig = {}) {
@@ -48,8 +54,8 @@ class UseCasesMock {
   }
 
   user = new UserUseCaseMock()
-
   store = new Store()
+  claim = new Claim()
 }
 
 export default UseCasesMock;

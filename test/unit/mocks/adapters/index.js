@@ -77,6 +77,20 @@ const localdb = {
     toJSON () {
       return {}
     }
+  },
+
+  Claim: class Claim {
+    static findById () {}
+    static find () {}
+    static findOne () {}
+
+    async save () {
+      return {}
+    }
+
+    toJSON () {
+      return {}
+    }
   }
 }
 

@@ -56,7 +56,6 @@ class ClaimUseCase {
       throw err
     }
   }
-
 }
 
 export default ClaimUseCase
