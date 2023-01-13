@@ -12,6 +12,7 @@ import UserRouter from './users/index.js'
 import ContactRESTController from './contact/index.js'
 import LogsRESTController from './logs/index.js'
 import WebhookRESTController from './webhook/index.js'
+import StoreRESTController from './stores/index.js'
 
 class RESTControllers {
   constructor (localConfig = {}) {
@@ -56,6 +57,9 @@ class RESTControllers {
 
     const webhookRESTController = new WebhookRESTController(dependencies)
     webhookRESTController.attach(app)
+
+    const storeRESTController = new StoreRESTController(dependencies)
+    storeRESTController.attach(app)
   }
 }
 
