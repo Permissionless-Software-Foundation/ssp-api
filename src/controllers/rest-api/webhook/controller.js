@@ -22,6 +22,7 @@ class WebhookController {
 
     // Bind 'this' object to all subfunctions
     this.token = this.token.bind(this)
+    this.claim = this.claim.bind(this)
   }
 
   /**
@@ -63,7 +64,7 @@ class WebhookController {
    * @apiGroup Webhook
    *
    * @apiExample Example usage:
-   * curl -H "Content-Type: application/json" -X POST -d '{ "ticker": "SSP-287262", "documentHash": "30cedeefa81ad5ee077641607ac1416415759e6d6cfb2de6bd78d491d8dcd3c5" }' localhost:5020/webhook/claim
+   * curl -H "Content-Type: application/json" -X POST -d '{ "txid": "123", "about": "456", "content": "789" }' localhost:5020/webhook/claim
    *
    */
   async claim (ctx) {
@@ -71,7 +72,8 @@ class WebhookController {
       const data = ctx.request.body
       console.log('webook/claim data: ', data)
 
-      const claim = true
+      // const claim = true
+      const claim = await this.useCases.claim.createClaim(data)
 
       ctx.body = {
         claim

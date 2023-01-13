@@ -7,6 +7,7 @@
 // Local libraries
 import UserUseCases from './user.js'
 import StoreUseCases from './stores.js'
+import ClaimUseCases from './claim-use-cases.js'
 
 class UseCases {
   constructor (localConfig = {}) {
@@ -20,6 +21,7 @@ class UseCases {
     // console.log('use-cases/index.js localConfig: ', localConfig)
     this.user = new UserUseCases(localConfig)
     this.store = new StoreUseCases(localConfig)
+    this.claim = new ClaimUseCases(localConfig)
   }
 
   // Run any startup Use Cases at the start of the app.
