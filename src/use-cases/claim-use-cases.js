@@ -76,7 +76,7 @@ class ClaimUseCase {
 
       const result = await this.axios.get(url)
       console.log('claim data: ', result.data)
-      console.log('typeof data: ', typeof(result.data))
+      console.log('typeof data: ', typeof (result.data))
 
       claimModel.downloadedContent = result.data
 
