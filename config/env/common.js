@@ -94,5 +94,9 @@ export default {
     ? parseInt(process.env.IPFS_API_PORT)
     : 5001,
 
-  chatPubSubChan: 'psf-ipfs-chat-001'
+  chatPubSubChan: 'psf-ipfs-chat-001',
+
+  // IPFS Gateway
+  ipfsGateway: 'https://p2wdb-gateway-678.fullstack.cash'
+
 }
