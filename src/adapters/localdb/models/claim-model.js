@@ -13,7 +13,7 @@ import mongoose from 'mongoose'
 const Claim = new mongoose.Schema({
   txid: { type: String, required: true, unique: true },
   type: { type: Number },
-  about: { about: String },
+  about: { type: String },
   content: { type: String },
   downloadedContent: { type: Object }
 })

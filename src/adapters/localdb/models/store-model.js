@@ -28,7 +28,8 @@ const Store = new mongoose.Schema({
   isSsp: { type: Boolean },
   immutableData: { type: Object },
   mutableData: { type: Object },
-  storeData: { type: Object }
+  storeData: { type: Object },
+  claims: { type: Array }
 })
 
 // export default mongoose.model('user', User)

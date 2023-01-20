@@ -42,6 +42,10 @@ class ClaimUseCase {
       // Input Validation
       this.claimEntity.validate(claimObj)
 
+      // Assign a value of 100 if the claim has not type.
+      // Type 100 is recorded but otherwise ignored.
+      if (!claimObj.type) claimObj.type = 100
+
       const claimModel = new this.ClaimModel(claimObj)
       // console.log('store model: ', storeModel)
 
@@ -57,6 +61,14 @@ class ClaimUseCase {
         this.getClaimContent(claimModel, claimModel.content)
       } catch (err) {
         console.log('Error trying to download claim content from IPFS gateway: ', err)
+      }
+
+      // Add the claim to the store model, but don't let it block execution
+      // and ignore any errors.
+      try {
+        this.addClaimToStore(claimModel)
+      } catch (err) {
+        console.log(`Error trying to add claim ${claimObj.txid} to token model ${claimObj.about}: `, err)
       }
 
       return claimModel.toJSON()
@@ -85,6 +97,28 @@ class ClaimUseCase {
       return true
     } catch (err) {
       console.error('Error in getClaimContent(): ', err.message)
+      throw err
+    }
+  }
+
+  // Add a claim to the Store database model
+  async addClaimToStore (claimModel) {
+    try {
+      console.log('claimModel: ', claimModel)
+
+      // Get the store associated with the claim.about field.
+      const tokenId = claimModel.about
+      const Store = this.adapters.localdb.Store
+      const thisStore = await Store.findOne({ tokenId })
+      console.log('thisStore: ', thisStore)
+
+      thisStore.claims.push(claimModel._id)
+
+      await thisStore.save()
+
+      return true
+    } catch (err) {
+      console.error('Error in addClaimToStore(): ', err.message)
       throw err
     }
   }
