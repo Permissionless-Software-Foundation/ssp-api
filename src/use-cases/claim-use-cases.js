@@ -57,14 +57,14 @@ class ClaimUseCase {
 
       // Download the content from an IPFS gateway, but don't let it block
       // execution, and ignore any errors.
-      if(claimObj.type === 102) {
+      if (claimObj.type === 102) {
         try {
           this.getClaimContent(claimModel, claimModel.content)
         } catch (err) {
           console.log('Error trying to download claim content from IPFS gateway: ', err)
         }
       }
-    
+
       // Add the claim to the store model, but don't let it block execution
       // and ignore any errors.
       try {
