@@ -35,12 +35,15 @@ class StoreController {
    */
   async all (ctx) {
     try {
-      const stores = await this.adapters.localdb.Store.find({})
+      // const stores = await this.adapters.localdb.Store.find({})
+
+      const stores = await this.useCases.store.getAllSafeStores()
 
       ctx.body = {
         stores
       }
     } catch (err) {
+      console.log('err: ', err)
       this.handleError(ctx, err)
     }
   }

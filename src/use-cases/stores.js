@@ -57,7 +57,7 @@ class StoreUseCase {
   }
 
   // Retrieve a database model for a store, based on its token ID. Then download
-  // the latest mutable data for the token and update the database model.
+  // the latest mutable data for the token and save it to the database model.
   async updateMutableData (tokenId) {
     try {
       // Retrieve the model of the store from the Mongo database.
@@ -86,6 +86,57 @@ class StoreUseCase {
     } catch (err) {
       // console.log('updateMutableData() error: ', err)
       wlogger.error(`Error in use-cases/stores.js/updateMutableData(): ${err.message}`)
+      throw err
+    }
+  }
+
+  // This function will probably be deprecated in the future, as it won't scale.
+  // This function retrieves all Stores in the database. It then looks at each
+  // Claim and removes the stores if the NSFW or Garbage claims meet a threshold.
+  // The function returns an array of leftover stores.
+  async getAllSafeStores() {
+    try {
+      const NSFW_THRESHOLD = 5
+      const GARBAGE_THRESHOLD = 10
+
+      // All stores in the database
+      const stores = await this.adapters.localdb.Store.find({})
+
+      // Stores filtered against NSFW and Garbage claims
+      const filteredStores = []
+
+      // Loop through each store
+      for(let i=0; i < stores.length; i++) {
+        const thisStore = stores[i]
+
+        const claims = thisStore.claims
+        // console.log(`Claims for store ${thisStore.name}: ${JSON.stringify(claims, null, 2)}`)
+
+        let nsfwClaims = 0
+        let garbageClaims = 0
+
+        // Loop through each claim.
+        for(let j=0; j < claims.length; j++) {
+          const thisClaimId = claims[j]
+          const thisClaim = await this.adapters.localdb.Claim.findById(thisClaimId)
+          // console.log('thisClaim: ', thisClaim)
+
+          if(thisClaim.type === 103) nsfwClaims++
+          if(thisClaim.type === 104) garbageClaims++
+        }
+
+        console.log(`NSFW claims against ${thisStore.name}: ${nsfwClaims}`)
+
+        // Skip this store if the Claims are above the threshold.
+        if(nsfwClaims > NSFW_THRESHOLD) continue
+        if(garbageClaims > GARBAGE_THRESHOLD) continue
+
+        filteredStores.push(thisStore)
+      }
+
+      return filteredStores
+    } catch(err) {
+      console.error('Error in getAllStores(): ', err.message)
       throw err
     }
   }
