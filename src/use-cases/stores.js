@@ -94,7 +94,7 @@ class StoreUseCase {
   // This function retrieves all Stores in the database. It then looks at each
   // Claim and removes the stores if the NSFW or Garbage claims meet a threshold.
   // The function returns an array of leftover stores.
-  async getAllSafeStores() {
+  async getAllSafeStores () {
     try {
       const NSFW_THRESHOLD = 5
       const GARBAGE_THRESHOLD = 10
@@ -106,7 +106,7 @@ class StoreUseCase {
       const filteredStores = []
 
       // Loop through each store
-      for(let i=0; i < stores.length; i++) {
+      for (let i = 0; i < stores.length; i++) {
         const thisStore = stores[i]
 
         const claims = thisStore.claims
@@ -116,26 +116,26 @@ class StoreUseCase {
         let garbageClaims = 0
 
         // Loop through each claim.
-        for(let j=0; j < claims.length; j++) {
+        for (let j = 0; j < claims.length; j++) {
           const thisClaimId = claims[j]
           const thisClaim = await this.adapters.localdb.Claim.findById(thisClaimId)
           // console.log('thisClaim: ', thisClaim)
 
-          if(thisClaim.type === 103) nsfwClaims++
-          if(thisClaim.type === 104) garbageClaims++
+          if (thisClaim.type === 103) nsfwClaims++
+          if (thisClaim.type === 104) garbageClaims++
         }
 
         console.log(`NSFW claims against ${thisStore.name}: ${nsfwClaims}`)
 
         // Skip this store if the Claims are above the threshold.
-        if(nsfwClaims > NSFW_THRESHOLD) continue
-        if(garbageClaims > GARBAGE_THRESHOLD) continue
+        if (nsfwClaims > NSFW_THRESHOLD) continue
+        if (garbageClaims > GARBAGE_THRESHOLD) continue
 
         filteredStores.push(thisStore)
       }
 
       return filteredStores
-    } catch(err) {
+    } catch (err) {
       console.error('Error in getAllStores(): ', err.message)
       throw err
     }
