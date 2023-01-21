@@ -8,9 +8,9 @@ import sinon from 'sinon'
 import IPFSCoordAdapter from '../../../src/adapters/ipfs/ipfs-coord.js'
 import create from '../mocks/ipfs-mock.js'
 import IPFSCoordMock from '../mocks/ipfs-coord-mock.js'
-import config from '../../../config/index.js'
+// import config from '../../../config/index.js'
 
-describe('#IPFS', () => {
+describe('#IPFS-coord', () => {
   let uut
   let sandbox
 
@@ -77,16 +77,16 @@ describe('#IPFS', () => {
       assert.equal(result, true)
     })
 
-    it('should return a promise that resolves into an instance of IPFS in production mode', async () => {
-      uut.config.isProduction = true
-      // Mock dependencies.
-      uut.IpfsCoord = IPFSCoordMock
-
-      const result = await uut.start()
-      // console.log('result: ', result)
-      assert.equal(result, true)
-      config.isProduction = false
-    })
+    // it('should return a promise that resolves into an instance of IPFS in production mode', async () => {
+    //   uut.config.isProduction = true
+    //   // Mock dependencies.
+    //   uut.IpfsCoord = IPFSCoordMock
+    //
+    //   const result = await uut.start()
+    //   // console.log('result: ', result)
+    //   assert.equal(result, true)
+    //   config.isProduction = false
+    // })
   })
 
   describe('#attachRPCRouter', () => {

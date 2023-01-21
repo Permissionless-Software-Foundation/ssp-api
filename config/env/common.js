@@ -88,11 +88,15 @@ export default {
   debugLevel: process.env.DEBUG_LEVEL ? parseInt(process.env.DEBUG_LEVEL) : 2,
 
   // Settings for production, using external go-ipfs node.
-  isProduction: process.env.SVC_ENV === 'production' ? true : false,
+  isProduction: process.env.SSP_ENV === 'production' ? true : false,
   ipfsHost: process.env.IPFS_HOST ? process.env.IPFS_HOST : 'localhost',
   ipfsApiPort: process.env.IPFS_API_PORT
     ? parseInt(process.env.IPFS_API_PORT)
     : 5001,
 
-  chatPubSubChan: 'psf-ipfs-chat-001'
+  chatPubSubChan: 'psf-ipfs-chat-001',
+
+  // IPFS Gateway
+  ipfsGateway: 'https://p2wdb-gateway-678.fullstack.cash'
+
 }
