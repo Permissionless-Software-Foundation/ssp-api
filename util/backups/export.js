@@ -11,7 +11,7 @@ import Store from '../../src/adapters/localdb/models/store-model.js'
 import Claim from '../../src/adapters/localdb/models/claim-model.js'
 import JsonFiles from '../../src/adapters/json-files.js'
 
-async function exportBackup() {
+async function exportBackup () {
   try {
     // Connect to the Mongo Database.
     mongoose.Promise = global.Promise
@@ -32,7 +32,7 @@ async function exportBackup() {
     console.log(`claims: ${JSON.stringify(claims, null, 2)}`)
 
     // Combine stores and claims into a single object
-    const backup = {stores, claims}
+    const backup = { stores, claims }
 
     // Export the data to a JSON file.
     await jsonFiles.writeJSON(backup, './ssp-api-backup.json')
@@ -41,7 +41,7 @@ async function exportBackup() {
 
     // Close the database connection
     mongoose.connection.close()
-  } catch(err) {
+  } catch (err) {
     console.error('Error while trying to create backup: ', err)
   }
 }

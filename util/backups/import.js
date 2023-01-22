@@ -11,7 +11,7 @@ import Store from '../../src/adapters/localdb/models/store-model.js'
 import Claim from '../../src/adapters/localdb/models/claim-model.js'
 import JsonFiles from '../../src/adapters/json-files.js'
 
-async function importBackup() {
+async function importBackup () {
   try {
     // Connect to the Mongo Database.
     mongoose.Promise = global.Promise
@@ -30,7 +30,7 @@ async function importBackup() {
     const claims = backupData.claims
 
     // Loop through each store and insert it into the database.
-    for(let i=0; i < stores.length; i++) {
+    for (let i = 0; i < stores.length; i++) {
       const thisStore = stores[i]
 
       const storeModel = new Store(thisStore)
@@ -38,7 +38,7 @@ async function importBackup() {
     }
 
     // Loop through each claim and insert it into the database.
-    for(let i=0; i < claims.length; i++) {
+    for (let i = 0; i < claims.length; i++) {
       const thisClaim = claims[i]
 
       const claimModel = new Claim(thisClaim)
@@ -49,7 +49,7 @@ async function importBackup() {
     mongoose.connection.close()
 
     console.log('Database restored!')
-  } catch(err) {
+  } catch (err) {
     console.error('Error while trying to create backup: ', err)
   }
 }
