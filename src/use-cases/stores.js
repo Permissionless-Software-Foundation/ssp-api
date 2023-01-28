@@ -60,7 +60,7 @@ class StoreUseCase {
   // the latest mutable data for the token and save it to the database model.
   async updateMutableData (tokenId) {
     try {
-      if(!tokenId) throw new Error('Token ID required to update mutable data for a store.')
+      if (!tokenId) throw new Error('Token ID required to update mutable data for a store.')
 
       // Retrieve the model of the store from the Mongo database.
       const storeModel = await this.StoreModel.findOne({ tokenId })
