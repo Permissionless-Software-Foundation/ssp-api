@@ -22,6 +22,7 @@ class StoreController {
 
     // Bind 'this' object to all subfunctions
     this.all = this.all.bind(this)
+    this.update = this.update.bind(this)
   }
 
   /**
@@ -35,12 +36,40 @@ class StoreController {
    */
   async all (ctx) {
     try {
-      const stores = await this.adapters.localdb.Store.find({})
+      // const stores = await this.adapters.localdb.Store.find({})
+
+      const stores = await this.useCases.store.getAllSafeStores()
 
       ctx.body = {
         stores
       }
     } catch (err) {
+      console.log('err: ', err)
+      this.handleError(ctx, err)
+    }
+  }
+
+  /**
+   * @api {get} /store/update Update the mutable data for a token
+   * @apiName UpdateStore
+   * @apiGroup Store
+   *
+   * @apiExample Example usage:
+   * curl -H "Content-Type: application/json" -X GET localhost:5020/store/update/ab6bc4ecb0c1b848dc98641787d2df90a84a3f8f38f7dc9e43f43b280e22df4c
+   *
+   */
+  async update (ctx) {
+    try {
+      // const stores = await this.adapters.localdb.Store.find({})
+      const tokenId = ctx.params.tokenId
+
+      const storeData = await this.useCases.store.updateMutableData(tokenId)
+
+      ctx.body = {
+        storeData
+      }
+    } catch (err) {
+      console.log('err: ', err)
       this.handleError(ctx, err)
     }
   }

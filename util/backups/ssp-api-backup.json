@@ -1,0 +1,469 @@
+{
+  "stores": [
+    {
+      "type": 129,
+      "nfts": [],
+      "claims": [
+        "63ca062eea6bf2aa1953be91",
+        "63ca0668ea6bf2aa1953be96",
+        "63ca066eea6bf2aa1953be9a",
+        "63ca066eea6bf2aa1953be9e",
+        "63ca066fea6bf2aa1953bea2",
+        "63ca066fea6bf2aa1953bea5",
+        "63ca066fea6bf2aa1953bea9",
+        "63cc0e8ab244a381b60ae9f8",
+        "63cc10fbec684b890a347be4",
+        "63cc10fbec684b890a347be7",
+        "63cc129aec684b890a347c13",
+        "63cc129aec684b890a347c16"
+      ],
+      "_id": "63ca0173cedcf988e0a4e17d",
+      "ticker": "SSP-287262",
+      "name": "Test Store 01",
+      "tokenId": "52ceab087d42b3756ee1361c9832fbaefaa3787e3386e60360bb87aa650c4f08",
+      "documentUri": "ipfs://bafybeihrjpf5ddsgtnhfzdjzbtkv44yjdo2yqxuv2g7cnbtfn5llsjdriu",
+      "documentHash": "30cedeefa81ad5ee077641607ac1416415759e6d6cfb2de6bd78d491d8dcd3c5",
+      "decimals": 0,
+      "mintBatonIsActive": false,
+      "tokensInCirculationBN": "1",
+      "tokensInCirculationStr": "1",
+      "blockCreated": 774847,
+      "totalBurned": "0",
+      "totalMinted": "1",
+      "isSsp": true,
+      "__v": 12,
+      "immutableData": {
+        "schema": "ps007-v1.0.1",
+        "dateCreated": "2023-01-10T22:13:22.516Z",
+        "userData": "",
+        "issuer": "LocalTradeList.com",
+        "issuerUrl": "https://localtradelist.com/",
+        "license": ""
+      },
+      "mutableData": {
+        "schema": "ps007-v1.0.1",
+        "tokenIcon": "https://bafybeihpim556shzzs2psiprxrhfocmhdd6xvzasfqenco3zcaregavu3u.ipfs.w3s.link/store-icon-1.png",
+        "fullSizedUrl": "",
+        "nsfw": false,
+        "userData": "",
+        "jsonLd": {
+          "storeData": {
+            "@context": "https://schema.org",
+            "@type": "Store",
+            "name": "Test Store 01",
+            "description": "A generic SSP token",
+            "keywords": [
+              "grocery",
+              "brick-and-mortar"
+            ],
+            "location": {
+              "@type": "Place",
+              "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 45.5767026,
+                "longitude": -122.6437683
+              }
+            },
+            "products": [],
+            "schema": "ps006-v1.0.0"
+          }
+        },
+        "about": "This Group token was created at LocalTradeList.com",
+        "category": "",
+        "tags": [],
+        "mediaType": ""
+      },
+      "storeData": {
+        "@context": "https://schema.org",
+        "@type": "Store",
+        "name": "Test Store 01",
+        "description": "A generic SSP token",
+        "keywords": [
+          "grocery",
+          "brick-and-mortar"
+        ],
+        "location": {
+          "@type": "Place",
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 45.5767026,
+            "longitude": -122.6437683
+          }
+        },
+        "products": [],
+        "schema": "ps006-v1.0.0"
+      }
+    },
+    {
+      "type": 129,
+      "nfts": [],
+      "claims": [
+        "63cb25ebb3871f2d3fc673c8",
+        "63cb25ebb3871f2d3fc673cb"
+      ],
+      "_id": "63cb1ce5af0883175222fad3",
+      "ticker": "SSP-570546",
+      "name": "Test Store 02",
+      "tokenId": "ce03bfeeae140eed3984c9af1b1890ecf4089e43a941556cdf8616130dbeae57",
+      "documentUri": "ipfs://bafybeihaapm2kpg4cneonrtjctr5algc342kkrfhwbzgpqbyufjbwf2z2y",
+      "documentHash": "ffabde9e5b324f218930499426ab433abe1916e61931e2f2c4131a06a9f11e87",
+      "decimals": 0,
+      "mintBatonIsActive": false,
+      "tokensInCirculationBN": "1",
+      "tokensInCirculationStr": "1",
+      "blockCreated": 776288,
+      "totalBurned": "0",
+      "totalMinted": "1",
+      "isSsp": true,
+      "__v": 2,
+      "immutableData": {
+        "schema": "ps007-v1.0.1",
+        "dateCreated": "2023-01-20T22:56:18.754Z",
+        "userData": "",
+        "issuer": "LocalTradeList.com",
+        "issuerUrl": "https://localtradelist.com/",
+        "license": ""
+      },
+      "mutableData": {
+        "schema": "ps007-v1.0.1",
+        "tokenIcon": "https://bafybeifreluq2irdl77re3ekztj4hwrwszcwdrwzmxi44uxun5xi6nbz64.ipfs.w3s.link/store-icon-3.jpeg",
+        "fullSizedUrl": "",
+        "nsfw": false,
+        "userData": "",
+        "jsonLd": {
+          "storeData": {
+            "@context": "https://schema.org",
+            "@type": "Store",
+            "name": "Test Store 02",
+            "description": "A generic SSP token",
+            "keywords": [
+              "grocery",
+              "brick-and-mortar"
+            ],
+            "location": {
+              "@type": "Place",
+              "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 45.5762367,
+                "longitude": -122.6460162
+              }
+            },
+            "products": [],
+            "schema": "ps006-v1.0.0"
+          }
+        },
+        "about": "This Group token was created at LocalTradeList.com",
+        "category": "",
+        "tags": [],
+        "mediaType": ""
+      },
+      "storeData": {
+        "@context": "https://schema.org",
+        "@type": "Store",
+        "name": "Test Store 02",
+        "description": "A generic SSP token",
+        "keywords": [
+          "grocery",
+          "brick-and-mortar"
+        ],
+        "location": {
+          "@type": "Place",
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 45.5762367,
+            "longitude": -122.6460162
+          }
+        },
+        "products": [],
+        "schema": "ps006-v1.0.0"
+      }
+    },
+    {
+      "type": 129,
+      "nfts": [],
+      "claims": [],
+      "_id": "63cbeac448db9d4f384faf00",
+      "ticker": "SSP-189132",
+      "name": "Test Store 03",
+      "tokenId": "a8ce4670235b0d9048ed61435cda6919a98c5620b8991b0a4467ff746bf04f8e",
+      "documentUri": "ipfs://bafybeif2qtu63h5qlr6634nflvvdtqb2j47bfuj6tba6fxrq7afdcoo63y",
+      "documentHash": "27ed5cf7e172aa765abe3533954b96c24b2a8e4b7f8e5c060c2bf2b99ca55bf3",
+      "decimals": 0,
+      "mintBatonIsActive": false,
+      "tokensInCirculationBN": "1",
+      "tokensInCirculationStr": "1",
+      "blockCreated": 776376,
+      "totalBurned": "0",
+      "totalMinted": "1",
+      "isSsp": true,
+      "__v": 0,
+      "immutableData": {
+        "schema": "ps007-v1.0.1",
+        "dateCreated": "2023-01-21T13:32:36.635Z",
+        "userData": "",
+        "issuer": "LocalTradeList.com",
+        "issuerUrl": "https://localtradelist.com/",
+        "license": ""
+      },
+      "mutableData": {
+        "schema": "ps007-v1.0.1",
+        "tokenIcon": "https://bafybeicsekv64aljvxaq2gver4z25wsmud4ee6lvelmf3kcplqnmesayei.ipfs.w3s.link/store-icon-4.png",
+        "fullSizedUrl": "",
+        "nsfw": false,
+        "userData": "",
+        "jsonLd": {
+          "storeData": {
+            "@context": "https://schema.org",
+            "@type": "Store",
+            "name": "Test Store 03",
+            "description": "A generic SSP token",
+            "keywords": [
+              "grocery",
+              "brick-and-mortar"
+            ],
+            "location": {
+              "@type": "Place",
+              "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 45.5109146,
+                "longitude": -122.5681256
+              }
+            },
+            "products": [],
+            "schema": "ps006-v1.0.0"
+          }
+        },
+        "about": "This Group token was created at LocalTradeList.com",
+        "category": "",
+        "tags": [],
+        "mediaType": ""
+      },
+      "storeData": {
+        "@context": "https://schema.org",
+        "@type": "Store",
+        "name": "Test Store 03",
+        "description": "A generic SSP token",
+        "keywords": [
+          "grocery",
+          "brick-and-mortar"
+        ],
+        "location": {
+          "@type": "Place",
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 45.5109146,
+            "longitude": -122.5681256
+          }
+        },
+        "products": [],
+        "schema": "ps006-v1.0.0"
+      }
+    },
+    {
+      "type": 129,
+      "nfts": [],
+      "claims": [],
+      "_id": "63cd344a6e65b50fb65e86eb",
+      "ticker": "SSP-315988",
+      "name": "Test Store 04",
+      "tokenId": "317d734a97a139f2bf99713cee09bcd26557b169195a8781f072f009589ffa7f",
+      "documentUri": "ipfs://bafybeiduougcar4a2ed3mvxkiazpx4khqwvjg5ifjb7m5bzpl7kpwhze3i",
+      "documentHash": "24f9f7cadfc1a3acae149dfeb38484eac53e7adf947104e730489a4c617ae47f",
+      "decimals": 0,
+      "mintBatonIsActive": false,
+      "tokensInCirculationBN": "1",
+      "tokensInCirculationStr": "1",
+      "blockCreated": 776525,
+      "totalBurned": "0",
+      "totalMinted": "1",
+      "isSsp": true,
+      "__v": 0,
+      "immutableData": {
+        "schema": "ps007-v1.0.1",
+        "dateCreated": "2023-01-22T13:00:42.802Z",
+        "userData": "",
+        "issuer": "LocalTradeList.com",
+        "issuerUrl": "https://localtradelist.com/",
+        "license": ""
+      },
+      "mutableData": {
+        "schema": "ps007-v1.0.1",
+        "tokenIcon": "https://bafybeicsekv64aljvxaq2gver4z25wsmud4ee6lvelmf3kcplqnmesayei.ipfs.w3s.link/store-icon-4.png",
+        "fullSizedUrl": "",
+        "nsfw": false,
+        "userData": "",
+        "jsonLd": {
+          "storeData": {
+            "@context": "https://schema.org",
+            "@type": "Store",
+            "name": "Test Store 04",
+            "description": "This is a test store. A short description would go here.",
+            "moreInfoLink": "http://FullStack.cash",
+            "keywords": [
+              "grocery",
+              "brick-and-mortar"
+            ],
+            "location": {
+              "@type": "Place",
+              "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 45.564145,
+                "longitude": -122.5400852
+              }
+            },
+            "products": [],
+            "schema": "ps006-v1.0.0"
+          }
+        },
+        "about": "This Group token was created at LocalTradeList.com",
+        "category": "",
+        "tags": [],
+        "mediaType": ""
+      },
+      "storeData": {
+        "@context": "https://schema.org",
+        "@type": "Store",
+        "name": "Test Store 04",
+        "description": "This is a test store. A short description would go here.",
+        "moreInfoLink": "http://FullStack.cash",
+        "keywords": [
+          "grocery",
+          "brick-and-mortar"
+        ],
+        "location": {
+          "@type": "Place",
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 45.564145,
+            "longitude": -122.5400852
+          }
+        },
+        "products": [],
+        "schema": "ps006-v1.0.0"
+      }
+    }
+  ],
+  "claims": [
+    {
+      "_id": "63ca062eea6bf2aa1953be91",
+      "txid": "d6b69017574b171cd73119daaa28dcade62cd39ca56507ccd1a53f2b9918d165",
+      "type": 100,
+      "about": "52ceab087d42b3756ee1361c9832fbaefaa3787e3386e60360bb87aa650c4f08",
+      "content": "bafybeicy2ynkojfji4nbwslcpaf6yimpw3f7z6ohdefbeg3tyygnoqtoru",
+      "__v": 0,
+      "downloadedContent": {
+        "about": "52ceab087d42b3756ee1361c9832fbaefaa3787e3386e60360bb87aa650c4f08"
+      }
+    },
+    {
+      "_id": "63ca0668ea6bf2aa1953be96",
+      "txid": "da09c5694c9eb3b2baf892b8fb1f43ca55bede403ac3cbd72ec329e421e9814b",
+      "type": 100,
+      "about": "52ceab087d42b3756ee1361c9832fbaefaa3787e3386e60360bb87aa650c4f08",
+      "content": "bafybeicy2ynkojfji4nbwslcpaf6yimpw3f7z6ohdefbeg3tyygnoqtoru",
+      "__v": 0
+    },
+    {
+      "_id": "63ca066eea6bf2aa1953be9a",
+      "txid": "3031b755ee58bef3f69acb05d59cd3ec5e438c8e037c8f503d623cb5e239616a",
+      "type": 100,
+      "about": "52ceab087d42b3756ee1361c9832fbaefaa3787e3386e60360bb87aa650c4f08",
+      "content": "bafybeicy2ynkojfji4nbwslcpaf6yimpw3f7z6ohdefbeg3tyygnoqtoru",
+      "__v": 0
+    },
+    {
+      "_id": "63ca066eea6bf2aa1953be9e",
+      "txid": "392bca1ba4b58658e3b755481c9cbe86c663f294c8c32d2b31765732363ab924",
+      "type": 100,
+      "about": "52ceab087d42b3756ee1361c9832fbaefaa3787e3386e60360bb87aa650c4f08",
+      "content": "bafybeicy2ynkojfji4nbwslcpaf6yimpw3f7z6ohdefbeg3tyygnoqtoru",
+      "__v": 0
+    },
+    {
+      "_id": "63ca066fea6bf2aa1953bea2",
+      "txid": "7e8edb245b6c60cb8de30650d27a4289ef0520f4ee3d954a19cb7df01f1e96c4",
+      "type": 103,
+      "about": "52ceab087d42b3756ee1361c9832fbaefaa3787e3386e60360bb87aa650c4f08",
+      "content": "bafybeicy2ynkojfji4nbwslcpaf6yimpw3f7z6ohdefbeg3tyygnoqtoru",
+      "__v": 0
+    },
+    {
+      "_id": "63ca066fea6bf2aa1953bea5",
+      "txid": "958523aa43c2b248d8f71e3b35be200bbd0d6b7dd743459bafb1773b4fbfbe96",
+      "type": 100,
+      "about": "52ceab087d42b3756ee1361c9832fbaefaa3787e3386e60360bb87aa650c4f08",
+      "content": "bafybeicy2ynkojfji4nbwslcpaf6yimpw3f7z6ohdefbeg3tyygnoqtoru",
+      "__v": 0
+    },
+    {
+      "_id": "63ca066fea6bf2aa1953bea9",
+      "txid": "f0b9220c19d29b241fa97768785b07e620556a35f86bab5583f832f6e6950902",
+      "type": 100,
+      "about": "52ceab087d42b3756ee1361c9832fbaefaa3787e3386e60360bb87aa650c4f08",
+      "content": "bafybeicy2ynkojfji4nbwslcpaf6yimpw3f7z6ohdefbeg3tyygnoqtoru",
+      "__v": 0
+    },
+    {
+      "_id": "63cb25ebb3871f2d3fc673c8",
+      "txid": "675e7c4520a4a6e3ee2288dfc0578f32f060dbff76e2893ba91447995e2c670f",
+      "type": 103,
+      "about": "ce03bfeeae140eed3984c9af1b1890ecf4089e43a941556cdf8616130dbeae57",
+      "content": "bafybeicryhqqxlo5ujchiazmsc7uxphwsdato626jmkrv2kwwzifsgd3km",
+      "__v": 0,
+      "downloadedContent": {
+        "about": "ce03bfeeae140eed3984c9af1b1890ecf4089e43a941556cdf8616130dbeae57"
+      }
+    },
+    {
+      "_id": "63cb25ebb3871f2d3fc673cb",
+      "txid": "d87cc5b39b4efea64cbd02127978fa81549922583f53319be28edd43add531a2",
+      "type": 103,
+      "about": "ce03bfeeae140eed3984c9af1b1890ecf4089e43a941556cdf8616130dbeae57",
+      "content": "bafybeicy2ynkojfji4nbwslcpaf6yimpw3f7z6ohdefbeg3tyygnoqtoru",
+      "__v": 0,
+      "downloadedContent": {
+        "about": "52ceab087d42b3756ee1361c9832fbaefaa3787e3386e60360bb87aa650c4f08"
+      }
+    },
+    {
+      "_id": "63cc0e8ab244a381b60ae9f8",
+      "txid": "623d8a1a46d5a48949e0f6e6b9402af8c9b950e301cb7ba553b2fbd2ac3d18fc",
+      "type": 103,
+      "about": "52ceab087d42b3756ee1361c9832fbaefaa3787e3386e60360bb87aa650c4f08",
+      "content": "NSFW",
+      "__v": 0
+    },
+    {
+      "_id": "63cc10fbec684b890a347be4",
+      "txid": "97fd27e7fa7f8cdf8c6d743195c74ee9b9939329961044bb29aa60f42e463637",
+      "type": 103,
+      "about": "52ceab087d42b3756ee1361c9832fbaefaa3787e3386e60360bb87aa650c4f08",
+      "content": "NSFW",
+      "__v": 0
+    },
+    {
+      "_id": "63cc10fbec684b890a347be7",
+      "txid": "c2afdd22829c5d867b30df0bb6d857784d4c3bfd4a6445955801364245e53da7",
+      "type": 103,
+      "about": "52ceab087d42b3756ee1361c9832fbaefaa3787e3386e60360bb87aa650c4f08",
+      "content": "NSFW",
+      "__v": 0
+    },
+    {
+      "_id": "63cc129aec684b890a347c13",
+      "txid": "06a93764945e5bacb2b5d0436d416b81ca2ec46370dad8f2420f2859a3a68f1f",
+      "type": 103,
+      "about": "52ceab087d42b3756ee1361c9832fbaefaa3787e3386e60360bb87aa650c4f08",
+      "content": "NSFW",
+      "__v": 0
+    },
+    {
+      "_id": "63cc129aec684b890a347c16",
+      "txid": "cbef7a73501cbc07064f68a2aac863b1f95454e9fbb67d8a46b62ee9d0b3701c",
+      "type": 103,
+      "about": "52ceab087d42b3756ee1361c9832fbaefaa3787e3386e60360bb87aa650c4f08",
+      "content": "NSFW",
+      "__v": 0
+    }
+  ]
+}
