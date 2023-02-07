@@ -58,7 +58,7 @@ class StoreUseCase {
 
   // Retrieve a database model for a store, based on its token ID. Then download
   // the latest mutable data for the token and save it to the database model.
-  async updateMutableData (tokenId) {
+  async updateMutableData (tokenId, updateCache = false) {
     try {
       if (!tokenId) throw new Error('Token ID required to update mutable data for a store.')
 
@@ -68,8 +68,8 @@ class StoreUseCase {
         throw new Error(`updateMutableData(): Store not found in database with token ID ${tokenId}`)
       }
 
-      // Get the mutable data for the token.
-      const tokenData = await this.wallet.getTokenData2(tokenId)
+      // Get the mutable data for the token and update the cache on the server.
+      const tokenData = await this.wallet.getTokenData2(tokenId, updateCache)
       // console.log(`tokenData: ${JSON.stringify(tokenData, null, 2)}`)
 
       // Abort if the mutable data could not be downloaded.

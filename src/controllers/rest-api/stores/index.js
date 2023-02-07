@@ -46,7 +46,7 @@ class StoreRouter {
 
     // Define the routes and attach the controller.
     this.router.get('/all', this.storeRESTController.all)
-    this.router.get('/update/:tokenId', this.storeRESTController.update)
+    this.router.post('/update', this.storeRESTController.update)
 
     // Attach the Controller routes to the Koa app.
     app.use(this.router.routes())
