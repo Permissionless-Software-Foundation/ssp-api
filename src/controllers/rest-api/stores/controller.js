@@ -61,9 +61,10 @@ class StoreController {
   async update (ctx) {
     try {
       // const stores = await this.adapters.localdb.Store.find({})
-      const tokenId = ctx.params.tokenId
+      const tokenId = ctx.request.body.tokenId
+      const updateCache = ctx.request.body.updateCache
 
-      const storeData = await this.useCases.store.updateMutableData(tokenId)
+      const storeData = await this.useCases.store.updateMutableData(tokenId, updateCache)
 
       ctx.body = {
         storeData
