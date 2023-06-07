@@ -147,8 +147,30 @@ class StoreUseCase {
         const thisClaim = await this.adapters.localdb.Claim.findById(thisClaimId)
         // console.log('thisClaim: ', thisClaim)
 
-        if (thisClaim.type === 103) nsfwClaims++
-        if (thisClaim.type === 104) garbageClaims++
+        if (thisClaim.type === 103) {
+          nsfwClaims++
+
+          // If this is marked as NSFW by the admin address, then automatically
+          // flag the store to be ignored.
+          if (thisClaim.address === this.config.adminAddr) {
+            thisStore.flaggedAsNSFW = true
+            await thisStore.save()
+
+            return true
+          }
+        }
+        if (thisClaim.type === 104) {
+          garbageClaims++
+
+          // If this is marked as Garbage by the admin address, then
+          // automatically flag the store to be ignored.
+          if (thisClaim.address === this.config.adminAddr) {
+            thisStore.flaggedAsGarbage = true
+            await thisStore.save()
+
+            return true
+          }
+        }
       }
 
       console.log(`NSFW claims against ${thisStore.name}: ${nsfwClaims}`)

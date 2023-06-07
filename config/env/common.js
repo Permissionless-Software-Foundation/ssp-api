@@ -102,6 +102,7 @@ export default {
 
   // Store protocol thresholds
   nsfwThreshold: process.env.NSFW_THRESHOLD ? parseInt(process.env.NSFW_THRESHOLD) : 4,
-  garbageThreshold: process.env.GARBAGE_THRESHOLD ? parseInt(process.env.GARBAGE_THRESHOLD) : 4
+  garbageThreshold: process.env.GARBAGE_THRESHOLD ? parseInt(process.env.GARBAGE_THRESHOLD) : 4,
+  adminAddr: process.env.ADMIN_ADDR ? process.env.ADMIN_ADDR : 'bitcoincash:qrhmucgs48v98u2he9qnlssrymawmst3rqypqmqa4l'
 
 }

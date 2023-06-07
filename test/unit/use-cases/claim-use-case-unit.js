@@ -44,7 +44,7 @@ describe('#claim-use-case', () => {
     it('should create a new claim database entry', async () => {
       // Mock dependencies and force desired code path
       sandbox.stub(uut.claimEntity, 'validate').returns(true)
-      sandbox.stub(uut.wallet,'getTxData').resolves([{
+      sandbox.stub(uut.wallet, 'getTxData').resolves([{
         vin: [{
           address: 'fake-addr'
         }]
@@ -64,7 +64,7 @@ describe('#claim-use-case', () => {
       try {
         // Mock dependencies and force desired code path
         sandbox.stub(uut.claimEntity, 'validate').returns(true)
-        sandbox.stub(uut.wallet,'getTxData').resolves([{
+        sandbox.stub(uut.wallet, 'getTxData').resolves([{
           vin: [{
             address: 'fake-addr'
           }]
