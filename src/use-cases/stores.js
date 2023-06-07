@@ -98,8 +98,8 @@ class StoreUseCase {
   // The function returns an array of leftover stores.
   async getAllSafeStores () {
     try {
-      const NSFW_THRESHOLD = 5
-      const GARBAGE_THRESHOLD = 10
+      const NSFW_THRESHOLD = 4
+      const GARBAGE_THRESHOLD = 4
 
       // All stores in the database
       const stores = await this.adapters.localdb.Store.find({})
@@ -130,8 +130,8 @@ class StoreUseCase {
         console.log(`NSFW claims against ${thisStore.name}: ${nsfwClaims}`)
 
         // Skip this store if the Claims are above the threshold.
-        if (nsfwClaims > NSFW_THRESHOLD) continue
-        if (garbageClaims > GARBAGE_THRESHOLD) continue
+        if (nsfwClaims >= NSFW_THRESHOLD) continue
+        if (garbageClaims >= GARBAGE_THRESHOLD) continue
 
         filteredStores.push(thisStore)
       }
