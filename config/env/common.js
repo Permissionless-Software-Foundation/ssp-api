@@ -98,6 +98,10 @@ export default {
   chatPubSubChan: 'psf-ipfs-chat-001',
 
   // IPFS Gateway
-  ipfsGateway: 'https://p2wdb-gateway-678.fullstack.cash'
+  ipfsGateway: 'https://p2wdb-gateway-678.fullstack.cash',
+
+  // Store protocol thresholds
+  nsfwThreshold: process.env.NSFW_THRESHOLD ? parseInt(process.env.NSFW_THRESHOLD) : 4,
+  garbageThreshold: process.env.GARBAGE_THRESHOLD ? parseInt(process.env.GARBAGE_THRESHOLD) : 4
 
 }

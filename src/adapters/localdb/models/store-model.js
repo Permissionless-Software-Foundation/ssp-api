@@ -29,7 +29,9 @@ const Store = new mongoose.Schema({
   immutableData: { type: Object },
   mutableData: { type: Object },
   storeData: { type: Object },
-  claims: { type: Array }
+  claims: { type: Array },
+  flaggedAsGarbage: { type: Boolean },
+  flaggedAsNSFW: { type: Boolean }
 })
 
 // export default mongoose.model('user', User)

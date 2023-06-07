@@ -9,6 +9,7 @@ import SlpWallet from 'minimal-slp-wallet'
 // Local libraries
 import StoreEntity from '../entities/store-entity.js'
 import wlogger from '../adapters/wlogger.js'
+import config from '../../config/index.js'
 
 class StoreUseCase {
   constructor (localConfig = {}) {
@@ -21,11 +22,10 @@ class StoreUseCase {
     }
 
     // Encapsulate dependencies
-    // this.UserEntity = new UserEntity()
-    // this.UserModel = this.adapters.localdb.Users
     this.storeEntity = new StoreEntity()
     this.StoreModel = this.adapters.localdb.Store
     this.wallet = new SlpWallet(undefined, { interface: 'consumer-api' })
+    this.config = config
   }
 
   // Create a new store model and add it to the Mongo database.
@@ -98,9 +98,6 @@ class StoreUseCase {
   // The function returns an array of leftover stores.
   async getAllSafeStores () {
     try {
-      const NSFW_THRESHOLD = 4
-      const GARBAGE_THRESHOLD = 4
-
       // All stores in the database
       const stores = await this.adapters.localdb.Store.find({})
 
@@ -111,27 +108,9 @@ class StoreUseCase {
       for (let i = 0; i < stores.length; i++) {
         const thisStore = stores[i]
 
-        const claims = thisStore.claims
-        // console.log(`Claims for store ${thisStore.name}: ${JSON.stringify(claims, null, 2)}`)
-
-        let nsfwClaims = 0
-        let garbageClaims = 0
-
-        // Loop through each claim.
-        for (let j = 0; j < claims.length; j++) {
-          const thisClaimId = claims[j]
-          const thisClaim = await this.adapters.localdb.Claim.findById(thisClaimId)
-          // console.log('thisClaim: ', thisClaim)
-
-          if (thisClaim.type === 103) nsfwClaims++
-          if (thisClaim.type === 104) garbageClaims++
-        }
-
-        console.log(`NSFW claims against ${thisStore.name}: ${nsfwClaims}`)
-
-        // Skip this store if the Claims are above the threshold.
-        if (nsfwClaims >= NSFW_THRESHOLD) continue
-        if (garbageClaims >= GARBAGE_THRESHOLD) continue
+        // Skip the token if it fails the filters.
+        const ignoreStore = await this.tokenShouldBeIgnored({ thisStore })
+        if (ignoreStore) continue
 
         filteredStores.push(thisStore)
       }
@@ -139,6 +118,59 @@ class StoreUseCase {
       return filteredStores
     } catch (err) {
       console.error('Error in getAllStores(): ', err.message)
+      throw err
+    }
+  }
+
+  // Analyze token data to see if Store should be ignored. Expects token database
+  // model as input, returns a Boolean. True = token should be ignored
+  async tokenShouldBeIgnored (inObj = {}) {
+    try {
+      const NSFW_THRESHOLD = this.config.nsfwThreshold
+      const GARBAGE_THRESHOLD = this.config.garbageThreshold
+
+      const { thisStore } = inObj
+
+      // Check the flags on the model for fast processing.
+      if (thisStore.flaggedAsGarbage) return true
+      if (thisStore.flaggedAsNSFW) return true
+
+      const claims = thisStore.claims
+      // console.log(`Claims for store ${thisStore.name}: ${JSON.stringify(claims, null, 2)}`)
+
+      let nsfwClaims = 0
+      let garbageClaims = 0
+
+      // Loop through each claim.
+      for (let j = 0; j < claims.length; j++) {
+        const thisClaimId = claims[j]
+        const thisClaim = await this.adapters.localdb.Claim.findById(thisClaimId)
+        // console.log('thisClaim: ', thisClaim)
+
+        if (thisClaim.type === 103) nsfwClaims++
+        if (thisClaim.type === 104) garbageClaims++
+      }
+
+      console.log(`NSFW claims against ${thisStore.name}: ${nsfwClaims}`)
+
+      // Skip this store if the Claims are above the threshold.
+      if (nsfwClaims >= NSFW_THRESHOLD) {
+        thisStore.flaggedAsNSFW = true
+        await thisStore.save()
+
+        return true
+      }
+      if (garbageClaims >= GARBAGE_THRESHOLD) {
+        thisStore.flaggedAsGarbage = true
+        await thisStore.save()
+
+        return true
+      }
+
+      // Return false if none of the above filters caught the entry.
+      return false
+    } catch (err) {
+      console.error('Error in tokenShouldBeIgnored()')
       throw err
     }
   }
