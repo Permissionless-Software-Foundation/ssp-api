@@ -6,6 +6,7 @@
 
 // Global npm libraries
 import axios from 'axios'
+import SlpWallet from 'minimal-slp-wallet'
 
 // Local libraries
 import ClaimEntity from '../entities/claim-entity.js'
@@ -29,7 +30,11 @@ class ClaimUseCase {
     this.ClaimModel = this.adapters.localdb.Claim
     this.config = config
     this.axios = axios
-    // this.wallet = new SlpWallet(undefined, { interface: 'consumer-api' })
+    this.wallet = new SlpWallet(undefined, { interface: 'consumer-api' })
+
+    // Bind 'this' object to all subfunctions
+    this.createClaim = this.createClaim.bind(this)
+    this.getClaimContent = this.getClaimContent.bind(this)
   }
 
   // Create a new claim model and add it to the Mongo database.
@@ -45,6 +50,13 @@ class ClaimUseCase {
       // Assign a value of 100 if the claim has not type.
       // Type 100 is recorded but otherwise ignored.
       if (!claimObj.type) claimObj.type = 100
+
+      // Get the input address of the TXID so that we can assign the claim as
+      // coming from a specific address.
+      const txDetails = await this.wallet.getTxData([claimObj.txid])
+      // console.log(`txDetails: ${JSON.stringify(txDetails, null, 2)}`)
+      const address = txDetails[0].vin[0].address
+      claimObj.address = address
 
       const claimModel = new this.ClaimModel(claimObj)
       // console.log('store model: ', storeModel)
