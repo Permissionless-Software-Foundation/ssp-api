@@ -80,7 +80,7 @@ const localdb = {
   },
 
   Claim: class Claim {
-    static findById () {}
+    static async findById () {}
     static find () {}
     static findOne () {}
 

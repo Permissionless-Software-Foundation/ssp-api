@@ -148,4 +148,38 @@ describe('#users-use-case', () => {
       }
     })
   })
+
+  describe('#tokenShouldBeIgnored', () => {
+    it('should return true if token was previously flagged as garbage', async () => {
+      const thisStore = {
+        flaggedAsGarbage: true
+      }
+
+      const result = await uut.tokenShouldBeIgnored({ thisStore })
+
+      assert.equal(result, true)
+    })
+
+    it('should return true if token was previously flagged as NSFW', async () => {
+      const thisStore = {
+        flaggedAsNSFW: true
+      }
+
+      const result = await uut.tokenShouldBeIgnored({ thisStore })
+
+      assert.equal(result, true)
+    })
+
+    it('should return false if token has no claims', async () => {
+      const thisStore = {
+        flaggedAsGarbage: false,
+        flaggedAsNSFW: false,
+        claims: []
+      }
+
+      const result = await uut.tokenShouldBeIgnored({ thisStore })
+
+      assert.equal(result, false)
+    })
+  })
 })

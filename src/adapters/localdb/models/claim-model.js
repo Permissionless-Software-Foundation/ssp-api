@@ -15,7 +15,8 @@ const Claim = new mongoose.Schema({
   type: { type: Number },
   about: { type: String },
   content: { type: String },
-  downloadedContent: { type: Object }
+  downloadedContent: { type: Object },
+  address: { type: String } // Address that generated the claim (vin[0])
 })
 
 // export default mongoose.model('user', User)

@@ -42,12 +42,17 @@ describe('#claim-use-case', () => {
 
   describe('#createClaim', () => {
     it('should create a new claim database entry', async () => {
+      // Mock dependencies and force desired code path
+      sandbox.stub(uut.claimEntity, 'validate').returns(true)
+      sandbox.stub(uut.wallet, 'getTxData').resolves([{
+        vin: [{
+          address: 'fake-addr'
+        }]
+      }])
+
       const mockObj = {
         txid: 'test'
       }
-
-      // Mock dependencies and force desired code path
-      sandbox.stub(uut.claimEntity, 'validate').returns(true)
 
       const result = await uut.createClaim(mockObj)
       // console.log('result: ', result)
@@ -59,6 +64,11 @@ describe('#claim-use-case', () => {
       try {
         // Mock dependencies and force desired code path
         sandbox.stub(uut.claimEntity, 'validate').returns(true)
+        sandbox.stub(uut.wallet, 'getTxData').resolves([{
+          vin: [{
+            address: 'fake-addr'
+          }]
+        }])
         const ClaimModel = class Claim {
           async save () {
             throw new Error('test error')

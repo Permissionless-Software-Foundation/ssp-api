@@ -66,5 +66,6 @@ orbitdb
 ipfsdata
 .ipfsdata
 data/
+wallet.json
 
 !README.md
