@@ -12,6 +12,7 @@ import sinon from 'sinon'
 // Unit under test (uut)
 import StoreUseCases from '../../../src/use-cases/stores.js'
 import adapters from '../mocks/adapters/index.js'
+import config from '../../../config/index.js'
 
 describe('#users-use-case', () => {
   let uut
@@ -180,6 +181,114 @@ describe('#users-use-case', () => {
       const result = await uut.tokenShouldBeIgnored({ thisStore })
 
       assert.equal(result, false)
+    })
+
+    it('should return true if admin address flags token as garbage', async () => {
+      // Mock dependencies and force desired code path
+      sandbox.stub(uut.adapters.localdb.Claim, 'findById').resolves({
+        address: config.adminAddr,
+        type: 104
+      })
+
+      const thisStore = {
+        flaggedAsGarbage: false,
+        flaggedAsNSFW: false,
+        claims: ['fake-id'],
+        save: async () => {}
+      }
+
+      const result = await uut.tokenShouldBeIgnored({ thisStore })
+
+      // Result should be true
+      assert.equal(result, true)
+
+      // flaggedAsGarbage should be set to true
+      assert.equal(thisStore.flaggedAsGarbage, true)
+      assert.equal(thisStore.flaggedAsNSFW, false)
+    })
+
+    it('should return true if admin address flags token as garbage', async () => {
+      // Mock dependencies and force desired code path
+      sandbox.stub(uut.adapters.localdb.Claim, 'findById').resolves({
+        address: config.adminAddr,
+        type: 103
+      })
+
+      const thisStore = {
+        flaggedAsGarbage: false,
+        flaggedAsNSFW: false,
+        claims: ['fake-id'],
+        save: async () => {}
+      }
+
+      const result = await uut.tokenShouldBeIgnored({ thisStore })
+
+      // Result should be true
+      assert.equal(result, true)
+
+      // flaggedAsNSFW should be set to true
+      assert.equal(thisStore.flaggedAsGarbage, false)
+      assert.equal(thisStore.flaggedAsNSFW, true)
+    })
+
+    it('should return true if garbage claims exceed threshold', async () => {
+      // Mock dependencies and force desired code path
+      sandbox.stub(uut.adapters.localdb.Claim, 'findById').resolves({
+        address: 'fake-addr',
+        type: 104
+      })
+      uut.config.garbageThreshold = 4
+
+      const thisStore = {
+        flaggedAsGarbage: false,
+        flaggedAsNSFW: false,
+        claims: ['a', 'b', 'c', 'd', 'e'],
+        save: async () => {}
+      }
+
+      const result = await uut.tokenShouldBeIgnored({ thisStore })
+
+      // Result should be true
+      assert.equal(result, true)
+
+      // flaggedAsGarbage should be set to true
+      assert.equal(thisStore.flaggedAsGarbage, true)
+      assert.equal(thisStore.flaggedAsNSFW, false)
+    })
+
+    it('should return true if NSFW claims exceed threshold', async () => {
+      // Mock dependencies and force desired code path
+      sandbox.stub(uut.adapters.localdb.Claim, 'findById').resolves({
+        address: 'fake-addr',
+        type: 103
+      })
+      uut.config.nsfwThreshold = 4
+
+      const thisStore = {
+        flaggedAsGarbage: false,
+        flaggedAsNSFW: false,
+        claims: ['a', 'b', 'c', 'd', 'e'],
+        save: async () => {}
+      }
+
+      const result = await uut.tokenShouldBeIgnored({ thisStore })
+
+      // Result should be true
+      assert.equal(result, true)
+
+      // flaggedAsNSFW should be set to true
+      assert.equal(thisStore.flaggedAsGarbage, false)
+      assert.equal(thisStore.flaggedAsNSFW, true)
+    })
+
+    it('should catch, report, and throw errors', async () => {
+      try {
+        await uut.tokenShouldBeIgnored()
+
+        assert.fail('Unexpected code path')
+      } catch (err) {
+        assert.include(err.message, 'Cannot read')
+      }
     })
   })
 })
