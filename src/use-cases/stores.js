@@ -219,7 +219,7 @@ class StoreUseCase {
   // This function is used to detect which stores are currently displayed on
   // the map, so that details about those stores can be displayed on the
   // right side of the UI.
-  async filterStoresByBox(inObj = {}) {
+  async filterStoresByBox (inObj = {}) {
     try {
       const { box = {} } = inObj
       // console.log('box: ', box)
@@ -234,7 +234,7 @@ class StoreUseCase {
       const filteredStores = []
 
       // Filter them by the map boundry.
-      for(let i=0; i < stores.length; i++) {
+      for (let i = 0; i < stores.length; i++) {
         const thisStore = stores[i]
 
         try {
@@ -249,9 +249,8 @@ class StoreUseCase {
           const storeLngIsGood = StoreLng >= boxSw.lng && StoreLng <= boxNe.lng
 
           // Add the store to the filtered list if their coordinates land within the box.
-          if(storeLatIsGood && storeLngIsGood) filteredStores.push(thisStore)
-
-        } catch(err) {
+          if (storeLatIsGood && storeLngIsGood) filteredStores.push(thisStore)
+        } catch (err) {
           continue
         }
       }
@@ -263,23 +262,23 @@ class StoreUseCase {
         let aTime = a.lastUpdated
         let bTime = b.lastUpdated
 
-        if(!aTime) {
+        if (!aTime) {
           aTime = 946713600000
         } else {
           aTime = new Date(aTime).getTime()
         }
 
-        if(!bTime) {
+        if (!bTime) {
           bTime = 946713600000
         } else {
           bTime = new Date(bTime).getTime()
         }
-        
+
         return bTime - aTime
       })
 
       return filteredStores
-    } catch(err) {
+    } catch (err) {
       console.error('Error in MapUtil.filterStoresByBox: ', err)
     }
   }

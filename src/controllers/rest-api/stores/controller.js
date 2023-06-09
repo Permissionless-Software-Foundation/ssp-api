@@ -90,12 +90,12 @@ class StoreController {
       const box = ctx.request.body.box
       // console.log('box controller: ', box)
 
-      const stores = await this.useCases.store.filterStoresByBox({box})
+      const stores = await this.useCases.store.filterStoresByBox({ box })
 
       ctx.body = {
         stores
       }
-    } catch(err) {
+    } catch (err) {
       console.log('err: ', err)
       this.handleError(ctx, err)
     }
