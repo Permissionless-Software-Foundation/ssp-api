@@ -26,6 +26,12 @@ class StoreUseCase {
     this.StoreModel = this.adapters.localdb.Store
     this.wallet = new SlpWallet(undefined, { interface: 'consumer-api' })
     this.config = config
+
+    // Bind 'this' objec to all subfunctions
+    this.createStore = this.createStore.bind(this)
+    this.updateMutableData = this.updateMutableData.bind(this)
+    this.getAllSafeStores = this.getAllSafeStores.bind(this)
+    this.filterStoresByBox = this.filterStoresByBox.bind(this)
   }
 
   // Create a new store model and add it to the Mongo database.
@@ -202,6 +208,79 @@ class StoreUseCase {
     } catch (err) {
       console.error('Error in tokenShouldBeIgnored()')
       throw err
+    }
+  }
+
+  // This function expects an array of stores and a map boundry.
+  // The map boundry is defined by two sets of lat/long coordinates. One set
+  // defines the NE corner of the map, the other defines the SW corner.
+  // This function will return an array of stores, filtered by the map boundry.
+  // The returned stores will be within the box defined by the map boundry.
+  // This function is used to detect which stores are currently displayed on
+  // the map, so that details about those stores can be displayed on the
+  // right side of the UI.
+  async filterStoresByBox(inObj = {}) {
+    try {
+      const { box = {} } = inObj
+      // console.log('box: ', box)
+
+      const boxSw = box._southWest
+      const boxNe = box._northEast
+
+      // Get all the stores in the database.
+      const stores = await this.adapters.localdb.Store.find({})
+      // console.log('stores[0]: ', JSON.stringify(stores[0], null, 2))
+
+      const filteredStores = []
+
+      // Filter them by the map boundry.
+      for(let i=0; i < stores.length; i++) {
+        const thisStore = stores[i]
+
+        try {
+          const storeCoords = thisStore.storeData.location.geo
+          // console.log('storeCoords: ', storeCoords)
+
+          const StoreLat = parseFloat(storeCoords.latitude)
+          const StoreLng = parseFloat(storeCoords.longitude)
+
+          // Logical tests
+          const storeLatIsGood = StoreLat >= boxSw.lat && StoreLat <= boxNe.lat
+          const storeLngIsGood = StoreLng >= boxSw.lng && StoreLng <= boxNe.lng
+
+          // Add the store to the filtered list if their coordinates land within the box.
+          if(storeLatIsGood && storeLngIsGood) filteredStores.push(thisStore)
+
+        } catch(err) {
+          continue
+        }
+      }
+
+      // Sort the resulting stores by their lastUpdated timestamp.
+      // This will result in a DESCENDING list of stores, with the most recently
+      // updated stores at the top of the list.
+      filteredStores.sort((a, b) => {
+        let aTime = a.lastUpdated
+        let bTime = b.lastUpdated
+
+        if(!aTime) {
+          aTime = 946713600000
+        } else {
+          aTime = new Date(aTime).getTime()
+        }
+
+        if(!bTime) {
+          bTime = 946713600000
+        } else {
+          bTime = new Date(bTime).getTime()
+        }
+        
+        return bTime - aTime
+      })
+
+      return filteredStores
+    } catch(err) {
+      console.error('Error in MapUtil.filterStoresByBox: ', err)
     }
   }
 }

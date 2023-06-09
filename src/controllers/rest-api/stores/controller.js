@@ -23,6 +23,7 @@ class StoreController {
     // Bind 'this' object to all subfunctions
     this.all = this.all.bind(this)
     this.update = this.update.bind(this)
+    this.box = this.box.bind(this)
   }
 
   /**
@@ -50,12 +51,12 @@ class StoreController {
   }
 
   /**
-   * @api {get} /store/update Update the mutable data for a token
+   * @api {post} /store/update Update the mutable data for a token
    * @apiName UpdateStore
    * @apiGroup Store
    *
    * @apiExample Example usage:
-   * curl -H "Content-Type: application/json" -X GET localhost:5020/store/update/ab6bc4ecb0c1b848dc98641787d2df90a84a3f8f38f7dc9e43f43b280e22df4c
+   * curl -H "Content-Type: application/json" -X POST localhost:5020/store/update -d '{ "tokenId": "ab6bc4ecb0c1b848dc98641787d2df90a84a3f8f38f7dc9e43f43b280e22df4c", "updateCache": true  }'
    *
    */
   async update (ctx) {
@@ -70,6 +71,31 @@ class StoreController {
         storeData
       }
     } catch (err) {
+      console.log('err: ', err)
+      this.handleError(ctx, err)
+    }
+  }
+
+  /**
+   * @api {post} /store/box Get all stores within a box defined as map coordinates
+   * @apiName BoxStores
+   * @apiGroup Store
+   *
+   * @apiExample Example usage:
+   * curl -H "Content-Type: application/json" -X POST localhost:5020/store/box -d '{ "box": { "_northEast": { "lat": 52.20, "lng": -104.50 }, "_southWest": { "lat": 43.55, "lng": -142.12 } } }'
+   *
+   */
+  async box (ctx) {
+    try {
+      const box = ctx.request.body.box
+      // console.log('box controller: ', box)
+
+      const stores = await this.useCases.store.filterStoresByBox({box})
+
+      ctx.body = {
+        stores
+      }
+    } catch(err) {
       console.log('err: ', err)
       this.handleError(ctx, err)
     }
