@@ -29,6 +29,7 @@ const Store = new mongoose.Schema({
   immutableData: { type: Object },
   mutableData: { type: Object },
   storeData: { type: Object },
+  lastUpdated: { type: String }, // ISO timestamp of the last time token data was updated.
   claims: { type: Array },
   flaggedAsGarbage: { type: Boolean },
   flaggedAsNSFW: { type: Boolean }

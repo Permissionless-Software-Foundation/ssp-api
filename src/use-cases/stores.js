@@ -41,6 +41,10 @@ class StoreUseCase {
       const storeModel = new this.StoreModel(storeObj)
       // console.log('store model: ', storeModel)
 
+      // Set the update time.
+      const now = new Date()
+      storeModel.lastUpdated = now.toISOString()
+
       try {
         await storeModel.save()
       } catch (err) {
@@ -81,6 +85,10 @@ class StoreUseCase {
       storeModel.immutableData = tokenData.immutableData
       storeModel.mutableData = tokenData.mutableData
       storeModel.storeData = tokenData.mutableData.jsonLd.storeData
+
+      // Signal that the store was updated.
+      const now = new Date()
+      storeModel.lastUpdated = now.toISOString()
 
       await storeModel.save()
 
