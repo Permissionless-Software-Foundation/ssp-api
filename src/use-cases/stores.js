@@ -239,7 +239,7 @@ class StoreUseCase {
 
         // Skip the store if it should be ignored
         const ignoreStore = await this.tokenShouldBeIgnored({ thisStore })
-        if(ignoreStore) continue
+        if (ignoreStore) continue
 
         // Check that latitude and longitude of the store.
         try {
