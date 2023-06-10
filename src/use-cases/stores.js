@@ -237,6 +237,11 @@ class StoreUseCase {
       for (let i = 0; i < stores.length; i++) {
         const thisStore = stores[i]
 
+        // Skip the store if it should be ignored
+        const ignoreStore = await this.tokenShouldBeIgnored({ thisStore })
+        if(ignoreStore) continue
+
+        // Check that latitude and longitude of the store.
         try {
           const storeCoords = thisStore.storeData.location.geo
           // console.log('storeCoords: ', storeCoords)

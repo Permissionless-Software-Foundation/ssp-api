@@ -91,6 +91,7 @@ class StoreController {
       // console.log('box controller: ', box)
 
       const stores = await this.useCases.store.filterStoresByBox({ box })
+      // console.log('stores: ', stores)
 
       ctx.body = {
         stores
