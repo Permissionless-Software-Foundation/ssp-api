@@ -10,6 +10,7 @@ import SlpWallet from 'minimal-slp-wallet'
 import StoreEntity from '../entities/store-entity.js'
 import wlogger from '../adapters/wlogger.js'
 import config from '../../config/index.js'
+import FaucetUseCase from './faucet-use-case.js'
 
 class StoreUseCase {
   constructor (localConfig = {}) {
@@ -26,6 +27,7 @@ class StoreUseCase {
     this.StoreModel = this.adapters.localdb.Store
     this.wallet = new SlpWallet(undefined, { interface: 'consumer-api' })
     this.config = config
+    this.faucet = new FaucetUseCase(localConfig)
 
     // Bind 'this' objec to all subfunctions
     this.createStore = this.createStore.bind(this)

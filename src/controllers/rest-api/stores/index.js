@@ -48,6 +48,7 @@ class StoreRouter {
     this.router.get('/all', this.storeRESTController.all)
     this.router.post('/update', this.storeRESTController.update)
     this.router.post('/box', this.storeRESTController.box)
+    this.router.post('/faucet', this.storeRESTController.faucet)
 
     // Attach the Controller routes to the Koa app.
     app.use(this.router.routes())

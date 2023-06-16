@@ -24,6 +24,7 @@ class StoreController {
     this.all = this.all.bind(this)
     this.update = this.update.bind(this)
     this.box = this.box.bind(this)
+    this.faucet = this.faucet.bind(this)
   }
 
   /**
@@ -95,6 +96,30 @@ class StoreController {
 
       ctx.body = {
         stores
+      }
+    } catch (err) {
+      console.log('err: ', err)
+      this.handleError(ctx, err)
+    }
+  }
+
+  /**
+   * @api {post} /store/faucet Get a few cents of BCH to create a store with
+   * @apiName Faucet
+   * @apiGroup Store
+   *
+   * @apiExample Example usage:
+   * curl -H "Content-Type: application/json" -X POST localhost:5020/store/faucet -d '{ "bchAddress": "bitcoincash:qqlrzp23w08434twmvr4fxw672whkjy0py26r63g3d" }'
+   *
+   */
+  async faucet (ctx) {
+    try {
+      const bchAddress = ctx.request.body.bchAddress
+
+      const txid = await this.useCases.store.faucet.fundAddr({ bchAddress })
+
+      ctx.body = {
+        txid
       }
     } catch (err) {
       console.log('err: ', err)
