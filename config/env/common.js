@@ -106,8 +106,8 @@ export default {
   adminAddr: process.env.ADMIN_ADDR ? process.env.ADMIN_ADDR : 'bitcoincash:qrhmucgs48v98u2he9qnlssrymawmst3rqypqmqa4l',
 
   // (optional) Faucet
-  // useFaucet: process.env.USE_FAUCET ? true : false,
-  useFaucet: true,
+  useFaucet: process.env.USE_FAUCET ? true : false,
+  // useFaucet: true,
   faucetSats: 100000, // sats
   useWeb2: false,
   consumerUrl: 'https://free-bch.fullstack.cash'
