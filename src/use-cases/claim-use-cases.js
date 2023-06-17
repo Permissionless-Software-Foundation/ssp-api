@@ -126,7 +126,7 @@ class ClaimUseCase {
       const thisStore = await Store.findOne({ tokenId })
       console.log('thisStore: ', thisStore)
 
-      if(!thisStore) {
+      if (!thisStore) {
         throw new Error(`Store with tokenId ${tokenId} not found.`)
       }
 
