@@ -48,7 +48,8 @@ class TimerControllers {
   // Replace this example function with your own timer handler.
   exampleTimerFunc (negativeTest) {
     try {
-      console.log('Example timer controller executed.')
+      const now = new Date()
+      console.log(`Example timer controller executed at ${now.toLocaleString()}`)
 
       if (negativeTest) throw new Error('test error')
 

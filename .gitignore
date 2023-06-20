@@ -67,5 +67,6 @@ ipfsdata
 .ipfsdata
 data/
 wallet.json
+faucet-wallet.json
 
 !README.md

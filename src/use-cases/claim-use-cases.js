@@ -126,6 +126,10 @@ class ClaimUseCase {
       const thisStore = await Store.findOne({ tokenId })
       console.log('thisStore: ', thisStore)
 
+      if (!thisStore) {
+        throw new Error(`Store with tokenId ${tokenId} not found.`)
+      }
+
       thisStore.claims.push(claimModel._id)
 
       await thisStore.save()

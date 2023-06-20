@@ -33,7 +33,6 @@ WORKDIR /home/safeuser
 #RUN runuser -l safeuser -c "npm config set prefix '~/.npm-global'"
 
 # Update to the latest version of npm.
-#RUN npm install -g npm@7.23.0
 RUN npm install -g npm
 
 # npm mirror to prevent direct dependency on npm.
@@ -46,19 +45,17 @@ RUN npm set registry http://94.130.170.209:4873/
 
 # Clone the rest.bitcoin.com repository
 WORKDIR /home/safeuser
-RUN git clone https://github.com/Permissionless-Software-Foundation/ipfs-service-provider
+RUN git clone https://github.com/Permissionless-Software-Foundation/ssp-api
 
 # Switch to the desired branch. `master` is usually stable,
 # and `stage` has the most up-to-date changes.
-WORKDIR /home/safeuser/ipfs-service-provider
+WORKDIR /home/safeuser/ssp-api
 
 # For development: switch to unstable branch
 RUN git checkout ct-unstable
 
 # Install dependencies
-#RUN mkdir .ipfsdata
-#RUN npm install -g @mapbox/node-pre-gyp
-RUN npm install
+RUN npm ci
 
 # Generate the API docs
 RUN npm run docs

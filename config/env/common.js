@@ -103,6 +103,13 @@ export default {
   // Store protocol thresholds
   nsfwThreshold: process.env.NSFW_THRESHOLD ? parseInt(process.env.NSFW_THRESHOLD) : 4,
   garbageThreshold: process.env.GARBAGE_THRESHOLD ? parseInt(process.env.GARBAGE_THRESHOLD) : 4,
-  adminAddr: process.env.ADMIN_ADDR ? process.env.ADMIN_ADDR : 'bitcoincash:qrhmucgs48v98u2he9qnlssrymawmst3rqypqmqa4l'
+  adminAddr: process.env.ADMIN_ADDR ? process.env.ADMIN_ADDR : 'bitcoincash:qrhmucgs48v98u2he9qnlssrymawmst3rqypqmqa4l',
+
+  // (optional) Faucet
+  useFaucet: process.env.USE_FAUCET ? true : false,
+  // useFaucet: true,
+  faucetSats: 100000, // sats
+  useWeb2: false,
+  consumerUrl: 'https://free-bch.fullstack.cash'
 
 }

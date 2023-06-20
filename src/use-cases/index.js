@@ -8,6 +8,7 @@
 import UserUseCases from './user.js'
 import StoreUseCases from './stores.js'
 import ClaimUseCases from './claim-use-cases.js'
+import config from '../../config/index.js'
 
 class UseCases {
   constructor (localConfig = {}) {
@@ -22,12 +23,18 @@ class UseCases {
     this.user = new UserUseCases(localConfig)
     this.store = new StoreUseCases(localConfig)
     this.claim = new ClaimUseCases(localConfig)
+    this.config = config
   }
 
   // Run any startup Use Cases at the start of the app.
   async start () {
     // try {
     console.log('Async Use Cases have been started.')
+
+    if (this.config.useFaucet) {
+      const faucetWalletInfo = await this.store.faucet.openFaucetWallet()
+      await this.store.faucet.instanceWallet(faucetWalletInfo.wallet)
+    }
 
     return true
     // } catch (err) {

@@ -52,6 +52,10 @@ describe('#use-cases', () => {
 
   describe('#start', () => {
     it('should initialize async use cases', async () => {
+      // Mock dependencies and force desired code path.
+      sandbox.stub(uut.store.faucet, 'openFaucetWallet').resolves({})
+      sandbox.stub(uut.store.faucet, 'instanceWallet').resolves({})
+
       const result = await uut.start()
 
       assert.equal(result, true)
