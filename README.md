@@ -4,11 +4,10 @@
 
 ## Overview
 
-This is a node.js application for creating a REST API web server based on Koa. It also has a Mongo database.  It's forked from [ipfs-service-provider](https://github.com/Permissionless-Software-Foundation/ipfs-service-provider) boilerplate.
+This is a node.js application that creates a REST API. This software acts as middleware between the [ssp branch of psf-slp-indexer](https://github.com/Permissionless-Software-Foundation/psf-slp-indexer/tree/ssp) and the [localtradelist.com web app](https://github.com/christroutner/localtradelist.com). Details information is available at [docs.LocalTradeList.com](https://docs.localtradelist.com).
 
-This app is intended to be run on the same machine as the [`ssp` branch of psf-slp-indexer](https://github.com/Permissionless-Software-Foundation/psf-slp-indexer/tree/ssp). The `ssp` branch of psf-slp-indexer tracks Group tokens that follow the [Simple Store Protocol](https://github.com/Permissionless-Software-Foundation/specifications/blob/master/ps006-simple-store-protocol.md). When a SSP token is detected, the webhook will send the token data from psf-slp-indexer to this app.
+When the SLP indexer software detects a new token or [Claim](https://github.com/Permissionless-Software-Foundation/specifications/blob/master/ps008-claims.md) that follows the [Simple Store protocol](), it triggers a webhook that feeds the data into this software. The [LocalTradeList.com web app](https://localtradelist.com) then queries the REST API of this software to retrieve and display data about stores.
 
-This REST API and database provide endpoints that can be queried by a front end application like [LocalTradeList.com](https://localtradelist.com)
 
 ## Requirements
 
@@ -16,6 +15,16 @@ This REST API and database provide endpoints that can be queried by a front end 
 - npm **^8.3.0**
 - Docker **^20.10.8**
 - Docker Compose **^1.27.4**
+
+## Installation and Usage
+
+This app is intended to be operated using Docker and Docker Compose an an Ubuntu 18.04 or 20.04 operating system.
+
+- `cd production/docker`
+- `docker-compose pull`
+- `docker-compose build`
+- `docker-compose up -d`
+- `docker logs --tail 20 -f ssp-api`
 
 ## License
 
