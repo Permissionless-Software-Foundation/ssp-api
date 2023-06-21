@@ -23,7 +23,7 @@ export DEBUG_LEVEL=0
 
 
 # Production database connection string.
-export DBURL=mongodb://172.17.0.1:5555/ssp-api-prod
+export DBURL=mongodb://172.17.0.1:5575/ssp-api-prod
 
 # Configure REST API port
 export PORT=5020

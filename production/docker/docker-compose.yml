@@ -7,7 +7,7 @@ services:
     image: mongo:4.2.0
     container_name: mongo-ssp
     ports:
-      - '5555:27017' # <host port>:<container port>
+      - '5575:27017' # <host port>:<container port>
     volumes:
       - ../data/database:/data/db
     command: mongod --logpath=/dev/null # -- quiet
